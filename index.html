@@ -12,7 +12,13 @@
         box-sizing: border-box;
         font-family: Arial, sans-serif;
     }
-
+   
+body {
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+   
     html, body {
         height: 100%;
         overflow-x: hidden;
@@ -106,54 +112,39 @@
 <div id="parallax-bg"></div>
 
 <script>
-    /* ============================================================
-       PARALLAX AVANCÉ – 11 COUCHES, Z-INDEX + MOUVEMENT CALIBRÉ
-    ============================================================ */
+const images = [
+    "photos/photo1.jpg",
+    "photos/photo2.jpg",
+    "photos/photo3.jpg",
+    "photos/photo4.jpg",
+    "photos/photo5.jpg",
+    "photos/photo6.jpg",
+    "photos/photo7.jpg",
+    "photos/photo8.jpg",
+    "photos/photo9.jpg",
+    "photos/photo10.jpg",
+    "photos/photo11.jpg"
+];
 
-    const photoPaths = [
-        "photos/photo1.jpg",
-        "photos/photo2.jpg",
-        "photos/photo3.jpg",
-        "photos/photo4.jpg",
-        "photos/photo5.jpg",
-        "photos/photo6.jpg",
-        "photos/photo7.jpg",
-        "photos/photo8.jpg",
-        "photos/photo9.jpg",
-        "photos/photo10.jpg",
-        "photos/photo11.jpg"
-    ];
+let lastIndex = -1;
 
-    const container = document.getElementById("parallax-bg");
+window.addEventListener("scroll", () => {
+    const scrollMax = document.body.scrollHeight - window.innerHeight;
+    const percent = window.scrollY / scrollMax;
 
-    photoPaths.forEach((src, index) => {
-        const layer = document.createElement("div");
-        layer.classList.add("layer");
-        layer.style.backgroundImage = `url(${src})`;
+    const index = Math.min(images.length - 1, Math.floor(percent * images.length));
 
-        // Vitesse de déplacement
-        const depth = (index + 1) * 0.12;
-        layer.dataset.depth = depth;
+    if (index !== lastIndex) {
+        document.body.style.backgroundImage = `url(${images[index]})`;
+        document.body.style.transition = "background-image 1s ease-in-out";
+        lastIndex = index;
+    }
+});
 
-        // Ordre d’empilement : la première image est la plus proche,
-        // la dernière est la plus loin.
-        layer.style.zIndex = -(index + 1);
-
-        container.appendChild(layer);
-    });
-
-    // Animation classique parallax
-    window.addEventListener("scroll", () => {
-        const scrollY = window.scrollY;
-        const layers = document.querySelectorAll(".layer");
-
-        layers.forEach(layer => {
-            const depth = layer.dataset.depth;
-            const move = scrollY * depth * 0.25; // Limite le mouvement
-            layer.style.transform = `translateY(${move}px) scale(1.15)`;
-        });
-    });
+// Image par défaut
+document.body.style.backgroundImage = `url(${images[0]})`;
 </script>
+
 
 
 <!-- ================= SECTIONS ================= -->
