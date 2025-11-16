@@ -139,6 +139,9 @@
         const depth = (index + 1) * 0.15;  
         layer.dataset.depth = depth;
 
+    // AJOUT : profondeur visuelle
+    layer.style.zIndex = -(index + 1);
+       
         container.appendChild(layer);
     });
 
