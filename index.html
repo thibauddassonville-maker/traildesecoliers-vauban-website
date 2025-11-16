@@ -9,11 +9,99 @@
 <style>
 
    
+/* ===========================
+   RESET GLOBAL
+=========================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+html, body {
+    height: 100%;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+}
+
+/* ===========================
+   BACKGROUND SLIDESHOW
+=========================== */
 body {
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
+    background-repeat: no-repeat;
+    transition: background-image 1s ease-in-out;
+    min-height: 100vh;
 }
+
+/* ===========================
+   SECTIONS
+=========================== */
+section {
+    min-height: 100vh;
+    padding: 80px 10%;
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(4px);
+    position: relative;
+    z-index: 10;
+}
+
+/* ===========================
+   TITRES
+=========================== */
+h1 {
+    font-size: 3em;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #003366;
+}
+
+h2 {
+    font-size: 2em;
+    margin-bottom: 15px;
+    color: #004c99;
+}
+
+/* ===========================
+   TEXTE
+=========================== */
+p {
+    font-size: 1.2em;
+    line-height: 1.6em;
+    margin-bottom: 20px;
+}
+
+/* ===========================
+   BOUTON
+=========================== */
+.btn {
+    display: inline-block;
+    padding: 12px 20px;
+    background: #004c99;
+    color: white;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    background: #002f5e;
+}
+
+/* ===========================
+   PIED DE PAGE
+=========================== */
+footer {
+    text-align: center;
+    padding: 30px;
+    background: #002f5e;
+    color: white;
+    font-size: 0.9em;
+}
+
    
 
 </style>
@@ -25,6 +113,11 @@ body {
 <div id="parallax-bg"></div>
 
 <script>
+/* =====================================================
+   SLIDESHOW D'ARRIÈRE-PLAN – 11 IMAGES
+   Changement d'image selon la position du scroll
+===================================================== */
+
 const images = [
     "photos/photo1.jpg",
     "photos/photo2.jpg",
@@ -41,21 +134,27 @@ const images = [
 
 let lastIndex = -1;
 
-window.addEventListener("scroll", () => {
+function updateBackground() {
     const scrollMax = document.body.scrollHeight - window.innerHeight;
-    const percent = window.scrollY / scrollMax;
+    const scrollPercent = window.scrollY / scrollMax;
 
-    const index = Math.min(images.length - 1, Math.floor(percent * images.length));
+    // Choisir l'image en fonction du scroll
+    const index = Math.min(images.length - 1, Math.floor(scrollPercent * images.length));
 
     if (index !== lastIndex) {
         document.body.style.backgroundImage = `url(${images[index]})`;
-        document.body.style.transition = "background-image 1s ease-in-out";
         lastIndex = index;
     }
-});
+}
 
-// Image par défaut
+// Initialisation : première image
 document.body.style.backgroundImage = `url(${images[0]})`;
+
+// Mettre à jour à chaque scroll
+window.addEventListener("scroll", updateBackground);
+
+// Optionnel : mettre à jour au resize pour recalculer scrollMax
+window.addEventListener("resize", updateBackground);
 </script>
 
 
