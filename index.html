@@ -6,7 +6,6 @@
 <title>Course des Écoliers de Vauban – 31 mai 2026</title>
 
 <style>
-    /* RESET */
     * {
         margin: 0;
         padding: 0;
@@ -17,22 +16,46 @@
     html, body {
         height: 100%;
         overflow-x: hidden;
+        scroll-behavior: smooth;
     }
 
-    /* ----- SLIDESHOW BACKGROUND ----- */
-    body {
+    /* ===============================
+       PARALLAX CONTAINER
+    =============================== */
+    #parallax-bg {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        overflow: hidden;
+        z-index: -10;
+        perspective: 2px; /* profondeur */
+        background: black;
+    }
+
+    .layer {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 110%;     /* un peu plus large pour éviter les bordures */
+        height: 110%;
         background-size: cover;
         background-position: center;
-        background-attachment: fixed;
-        transition: background-image 1s ease-in-out;
+        background-repeat: no-repeat;
+        transform-origin: center;
     }
 
-    /* ----- PAGE CONTENT ----- */
+    /* ===============================
+       PAGE CONTENT
+    =============================== */
     section {
         min-height: 100vh;
         padding: 80px 10%;
         background: rgba(255,255,255,0.75);
         backdrop-filter: blur(4px);
+        position: relative;
+        z-index: 10;
     }
 
     h1 {
@@ -79,12 +102,18 @@
 
 <body>
 
-<script>
-    /* ------------------------------
-        SLIDESHOW / SCROLL BACKGROUND
-       ------------------------------ */
+<!-- ======================================================
+     PARALLAX BACKGROUND WITH MULTIPLE DEPTH LAYERS
+====================================================== -->
+<div id="parallax-bg"></div>
 
-    const photos = [
+
+<script>
+    /* ============================================================
+       PARALLAX AVANCÉ AVEC 11 IMAGES
+    ============================================================ */
+
+    const photoPaths = [
         "photos/photo1.jpg",
         "photos/photo2.jpg",
         "photos/photo3.jpg",
@@ -98,20 +127,37 @@
         "photos/photo11.jpg"
     ];
 
-    // Change background depending on scroll
-    window.addEventListener("scroll", () => {
-        const scrollPercent = window.scrollY / (document.body.scrollHeight - window.innerHeight);
-        const index = Math.floor(scrollPercent * photos.length);
+    const container = document.getElementById("parallax-bg");
 
-        document.body.style.backgroundImage = `url('${photos[index]}')`;
+    // On crée 11 couches en profondeur
+    photoPaths.forEach((src, index) => {
+        const layer = document.createElement("div");
+        layer.classList.add("layer");
+        layer.style.backgroundImage = `url(${src})`;
+
+        // Profondeur qui dépend de l’index
+        const depth = (index + 1) * 0.15;  
+        layer.dataset.depth = depth;
+
+        container.appendChild(layer);
     });
 
-    // Default background
-    document.body.style.backgroundImage = `url('${photos[0]}')`;
+    // Animation au scroll
+    window.addEventListener("scroll", () => {
+        const layers = document.querySelectorAll(".layer");
+        const scrollY = window.scrollY;
+
+        layers.forEach(layer => {
+            const depth = layer.dataset.depth;
+            const movement = scrollY * depth;
+            layer.style.transform = `translateY(${movement}px) scale(1.1)`;
+        });
+    });
 </script>
 
 
-<!-- ===== SECTIONS ===== -->
+
+<!-- ================= SECTIONS ================= -->
 
 <section id="accueil">
     <h1>Course des Écoliers de Vauban</h1>
@@ -122,46 +168,4 @@
         exceptionnel, au cœur du 9e arrondissement de Marseille.
     </p>
     <a href="#infos" class="btn">En savoir plus</a>
-</section>
-
-
-<section id="infos">
-    <h2>Informations Pratiques</h2>
-    <p><strong>📅 Date :</strong> dimanche 31 mai 2026</p>
-    <p><strong>📍 Lieu :</strong> Parc des Sœurs Franciscaines, Marseille</p>
-    <p><strong>🏃Âges :</strong> ouvert à tous les élèves de l’école Vauban (cycles 1 à 3)</p>
-    <p><strong>🎉 Au programme :</strong></p>
-    <ul>
-        <li>Courses par niveaux scolaires</li>
-        <li>Ateliers sportifs</li>
-        <li>Ravitaillement et animations</li>
-        <li>Remise des médailles</li>
-    </ul>
-</section>
-
-
-<section id="inscription">
-    <h2>Inscriptions</h2>
-    <p>
-        Les inscriptions ouvrent prochainement. Le formulaire en ligne permettra de choisir 
-        la catégorie de course, donner les informations médicales nécessaires et confirmer 
-        la présence des accompagnateurs.
-    </p>
-    <a href="#" class="btn">Bientôt disponible</a>
-</section>
-
-
-<section id="contact">
-    <h2>Contact</h2>
-    <p>Pour toute question, vous pouvez contacter l’équipe organisatrice :</p>
-    <p><strong>📧 Email :</strong> organisation.vauban@sport.fr</p>
-    <p><strong>📞 Téléphone :</strong> 04 91 XX XX XX</p>
-</section>
-
-
-<footer>
-    © 2026 – École Vauban – Événement sportif officiel
-</footer>
-
-</body>
-</html>
+<
