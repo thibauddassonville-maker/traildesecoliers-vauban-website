@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Trail des Écoliers de Vauban – 31 mai 2026</title>
+<title>Course des Écoliers de Vauban – 31 mai 2026</title>
 
 <style>
     * {
@@ -30,25 +30,24 @@
         height: 100vh;
         overflow: hidden;
         z-index: -10;
-        perspective: 20px; /* profondeur */
         background: black;
+        perspective: 2px; /* profondeur */
     }
 
     .layer {
         position: absolute;
         top: 0;
         left: 0;
-        width: 120%;     /* un peu plus large pour éviter les bordures */
-        height: 120%;
+        width: 130%;      /* éviter les bordures */
+        height: 130%;
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
         transform-origin: center;
-       
     }
 
     /* ===============================
-       PAGE CONTENT
+       CONTENT
     =============================== */
     section {
         min-height: 100vh;
@@ -103,15 +102,12 @@
 
 <body>
 
-<!-- ======================================================
-     PARALLAX BACKGROUND WITH MULTIPLE DEPTH LAYERS
-====================================================== -->
-<div id="parallax-bg">
-
+<!-- PARALLAX BACKGROUND -->
+<div id="parallax-bg"></div>
 
 <script>
     /* ============================================================
-       PARALLAX AVANCÉ AVEC 11 IMAGES
+       PARALLAX AVANCÉ – 11 COUCHES, Z-INDEX + MOUVEMENT CALIBRÉ
     ============================================================ */
 
     const photoPaths = [
@@ -130,35 +126,34 @@
 
     const container = document.getElementById("parallax-bg");
 
-    // On crée 11 couches en profondeur
     photoPaths.forEach((src, index) => {
         const layer = document.createElement("div");
         layer.classList.add("layer");
         layer.style.backgroundImage = `url(${src})`;
 
-        // Profondeur qui dépend de l’index
-        const depth = (index + 1) * 0.5;  
+        // Vitesse de déplacement
+        const depth = (index + 1) * 0.12;
         layer.dataset.depth = depth;
 
-    // AJOUT : profondeur visuelle
-    layer.style.zIndex = -(index + 1);
-       
+        // Ordre d’empilement : la première image est la plus proche,
+        // la dernière est la plus loin.
+        layer.style.zIndex = -(index + 1);
+
         container.appendChild(layer);
     });
 
-    // Animation au scroll
+    // Animation classique parallax
     window.addEventListener("scroll", () => {
-        const layers = document.querySelectorAll(".layer");
         const scrollY = window.scrollY;
+        const layers = document.querySelectorAll(".layer");
 
         layers.forEach(layer => {
             const depth = layer.dataset.depth;
-            const movement = scrollY * depth;
-            layer.style.transform = `translateY(${movement * 2}px) scale(1.1)`;
+            const move = scrollY * depth * 0.25; // Limite le mouvement
+            layer.style.transform = `translateY(${move}px) scale(1.15)`;
         });
     });
 </script>
-</div>
 
 
 <!-- ================= SECTIONS ================= -->
@@ -169,7 +164,7 @@
     <p>
         Bienvenue sur le site officiel de la grande course à pied organisée pour les élèves 
         de l’École Vauban ! Un événement sportif, festif et familial dans un cadre naturel 
-        exceptionnel, au cœur du 9e arrondissement de Marseille.
+        exceptionnel.
     </p>
     <a href="#infos" class="btn">En savoir plus</a>
 </section>
@@ -178,29 +173,20 @@
     <h2>Informations Pratiques</h2>
     <p><strong>📅 Date :</strong> dimanche 31 mai 2026</p>
     <p><strong>📍 Lieu :</strong> Parc des Sœurs Franciscaines, Marseille</p>
-    <p><strong>🏃Âges :</strong> ouvert à tous les élèves de l’école Vauban (cycles 1 à 3)</p>
-    <p><strong>🎉 Au programme :</strong></p>
-    <ul>
-        <li>Courses par niveaux scolaires</li>
-        <li>Ateliers sportifs</li>
-        <li>Ravitaillement et animations</li>
-        <li>Remise des médailles</li>
-    </ul>
+    <p><strong>🏃 Participants :</strong> Élèves de l’école Vauban (cycles 1 à 3)</p>
 </section>
 
 <section id="inscription">
     <h2>Inscriptions</h2>
     <p>
         Les inscriptions ouvrent prochainement. Le formulaire en ligne permettra de choisir 
-        la catégorie de course, donner les informations médicales nécessaires et confirmer 
-        la présence des accompagnateurs.
+        la catégorie de course, donner les informations nécessaires et confirmer la présence des accompagnateurs.
     </p>
     <a href="#" class="btn">Bientôt disponible</a>
 </section>
 
 <section id="contact">
     <h2>Contact</h2>
-    <p>Pour toute question, vous pouvez contacter l’équipe organisatrice :</p>
     <p><strong>📧 Email :</strong> organisation.vauban@sport.fr</p>
     <p><strong>📞 Téléphone :</strong> 04 91 XX XX XX</p>
 </section>
