@@ -12,45 +12,6 @@
 
 <body>
 
-<script>
-const images = [
-    "photos/photo1.jpg",
-    "photos/photo2.jpg",
-    "photos/photo3.jpg",
-    "photos/photo4.jpg",
-    "photos/photo5.jpg",
-    "photos/photo6.jpg",
-    "photos/photo7.jpg",
-    "photos/photo8.jpg",
-    "photos/photo9.jpg",
-    "photos/photo10.jpg",
-    "photos/photo11.jpg"
-];
-
-let lastIndex = -1;
-
-function updateBackground() {
-    const scrollMax = document.body.scrollHeight - window.innerHeight;
-    const scrollPercent = window.scrollY / scrollMax;
-
-    // Choisir l'image en fonction du scroll
-    const index = Math.min(images.length - 1, Math.floor(scrollPercent * images.length));
-
-    if (index !== lastIndex) {
-        document.body.style.backgroundImage = `url(${images[index]})`;
-        lastIndex = index;
-    }
-}
-
-// Initialisation : première image
-document.body.style.backgroundImage = `url(${images[0]})`;
-
-// Mettre à jour à chaque scroll
-window.addEventListener("scroll", updateBackground);
-
-// Optionnel : mettre à jour au resize pour recalculer scrollMax
-window.addEventListener("resize", updateBackground);
-</script>
 
 
 
@@ -124,6 +85,6 @@ window.addEventListener("resize", updateBackground);
 <footer>
     © 2026 – École Vauban – Événement sportif officiel
 </footer>
-
+<script src="script.js"></script>
 </body>
 </html>
