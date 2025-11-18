@@ -1,0 +1,25 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: Arial, sans-serif;
+}
+
+.cinematic-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 120vh; /* un peu plus grand pour mouvement vertical */
+    background-image: url("votre-image.jpg");
+    background-size: cover;
+    background-position: center;
+    will-change: transform, filter;
+    z-index: -1;
+}
+
+.content {
+    padding: 50px;
+    background: #fff;
+    margin-top: 120vh;
+}
