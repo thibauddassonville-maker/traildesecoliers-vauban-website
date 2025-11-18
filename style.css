@@ -90,7 +90,7 @@ body, html {
 .cinematic-bg {
     width: 100%;
     height: 100vh;
-    background: url("photos/photo2.jpg") center/cover no-repeat;
+    background: url("image.jpg") center/cover no-repeat;
 }
 
 .content {
