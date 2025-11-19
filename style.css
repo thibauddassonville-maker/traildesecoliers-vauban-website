@@ -96,6 +96,6 @@ body, html {
 
 .content {
     padding: 50px;
-    background: #fff;
+    background: transparent;
     margin-top: 120vh;
 }
