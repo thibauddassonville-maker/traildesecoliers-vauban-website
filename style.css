@@ -35,13 +35,13 @@ h1 {
     font-size: 3em;
     margin-bottom: 20px;
     text-align: center;
-    color: #003366;
+    color: transparent;
 }
 
 h2 {
     font-size: 2em;
     margin-bottom: 15px;
-    color: #004c99;
+    color: transparent;
 }
 
 /* ===========================
@@ -59,7 +59,7 @@ p {
 .btn {
     display: inline-block;
     padding: 12px 20px;
-    background: #004c99;
+    background: transparent;
     color: white;
     border-radius: 8px;
     text-decoration: none;
@@ -67,7 +67,7 @@ p {
 }
 
 .btn:hover {
-    background: #002f5e;
+    background: transparent;
 }
 
 /* ===========================
@@ -76,7 +76,7 @@ p {
 footer {
     text-align: center;
     padding: 30px;
-    background: #002f5e;
+    background: transparent;
     color: white;
     font-size: 0.9em;
 }
