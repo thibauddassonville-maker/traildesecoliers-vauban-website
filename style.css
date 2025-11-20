@@ -39,16 +39,8 @@ h1 {
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    line-height: 3;
+    line-height: 1;
     color: #333;
-}
-
-header.hero {
-    background: url('images/runners.jpg') center/cover no-repeat;
-    color: white;
-    height: 80vh;
-    display: flex;
-    flex-direction: column;
 }
 
 nav {
