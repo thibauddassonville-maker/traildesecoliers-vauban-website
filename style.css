@@ -70,6 +70,7 @@ nav a {
 }
 
 .btn-primary {
+    margin-top: 20px;
     background: #ff5722;
     padding: 12px 20px;
     color: white;
