@@ -6,3 +6,20 @@ document.addEventListener("scroll", () => {
 
     document.querySelector(".background").style.transform = `scale(${zoomFactor})`;
 });
+
+// Appliquer les animations sport/vitesse
+const elements = document.querySelectorAll('.card');
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible', 'impact');
+        }
+    });
+}, { threshold: 0.3 });
+
+// Ajouter classes de base
+elements.forEach(el => {
+    el.classList.add('speed-in', 'run-up', 'speed-lines');
+    observer.observe(el);
+});
