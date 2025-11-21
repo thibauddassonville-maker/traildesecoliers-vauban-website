@@ -79,7 +79,7 @@ nav a {
     margin: 20px 0;
 }
 
-.section {
+section {
 
     background: rgba(0, 0, 0, 0.4); /* un léger fond pour bien séparer */
     padding: 40px;
@@ -87,8 +87,8 @@ nav a {
     border-radius: 8px;
 }
 
-.section.alt {
-    background: #f7f7f7;
+section.alt {
+    background: rgba(255, 255, 255, 0.1);
 }
 
 .schedule-list li {
