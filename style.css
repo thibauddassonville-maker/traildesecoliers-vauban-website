@@ -1,4 +1,4 @@
-/* Reset */
+/* ===== RESET ===== */
 * {
     margin: 0;
     padding: 0;
@@ -7,18 +7,19 @@
 
 body {
     font-family: Arial, sans-serif;
-    color: white;
+    color: #FFFFFF; /* texte principal blanc */
     overflow-x: hidden;
+    line-height: 1.5;
 }
 
-/* Image de fond */
+/* ===== IMAGE DE FOND ===== */
 .background {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url("image.jpg");
+    background-image: url("image.jpg"); /* ton image */
     background-size: cover;
     background-position: center;
     z-index: -1;
@@ -26,53 +27,56 @@ body {
     transition: transform 0.1s linear;
 }
 
-/* HERO SECTION */
+/* ===== HERO ===== */
 .hero {
     text-align: center;
     padding: 150px 20px 120px;
     backdrop-filter: blur(6px);
-    background: rgba(0, 0, 0, 0.25);
+    background: rgba(20, 20, 20, 0.4);
 }
 
 .hero h1 {
     font-size: 3.5rem;
     margin-bottom: 15px;
+    color: #FF5722; /* accent principal */
 }
 
 .hero h2 {
     font-weight: normal;
     opacity: 0.9;
     margin-bottom: 30px;
+    color: #FFC107; /* accent secondaire */
 }
 
-/* Boutons */
+/* ===== BOUTONS ===== */
 .btn-primary, .btn-secondary {
     display: inline-block;
     padding: 12px 25px;
     border-radius: 6px;
     text-decoration: none;
-    color: white;
     font-weight: bold;
     transition: 0.2s ease;
 }
 
 .btn-primary {
-    background: #ff5722;
+    background: #FF5722;
+    color: #FFFFFF;
 }
 
 .btn-primary:hover {
-    background: #ff784e;
+    background: #FF784E;
 }
 
 .btn-secondary {
-    background: #444;
+    background: #FFC107;
+    color: #333333;
 }
 
 .btn-secondary:hover {
-    background: #666;
+    background: #FFD54F;
 }
 
-/* CARDS */
+/* ===== CARDS ===== */
 .cards {
     max-width: 1000px;
     margin: 50px auto;
@@ -83,6 +87,7 @@ body {
 }
 
 .card {
+    position: relative;
     padding: 30px;
     border-radius: 15px;
     background: rgba(20, 20, 20, 0.4);
@@ -98,43 +103,28 @@ body {
 
 .card h3 {
     margin-bottom: 20px;
+    color: #FF5722;
 }
 
 .card ul li {
     margin-bottom: 10px;
+    color: #E0E0E0;
 }
 
-/* FOOTER */
-.footer {
-    text-align: center;
-    padding: 30px;
-    margin-top: 60px;
-    background: rgba(0,0,0,0.3);
-    backdrop-filter: blur(4px);
-}
+/* ===== ANIMATIONS SPORT / VITESSE ===== */
 .speed-in {
     opacity: 0;
     transform: translateX(-40px) skewX(-6deg);
-    transition: 0.6s cubic-bezier(0.7, 0.01, 0.15, 1); /* accélération */
+    transition: 0.6s cubic-bezier(0.7, 0.01, 0.15, 1);
 }
 
-.speed-in.visible {
-    opacity: 1;
-    transform: translateX(0) skewX(0);
-}
-.impact {
-    animation: impact 0.3s ease-out forwards;
-}
-
-@keyframes impact {
-    0% { transform: scale(1); }
-    30% { transform: scale(1.04); }
-    60% { transform: scale(0.97); }
-    100% { transform: scale(1); }
+.run-up {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: 0.7s cubic-bezier(0.2, 1, 0.3, 1.3);
 }
 
 .speed-lines {
-    position: relative;
     overflow: hidden;
 }
 
@@ -161,23 +151,40 @@ body {
     opacity: 1;
 }
 
-.run-up {
-    opacity: 0;
-    transform: translateY(40px);
-    transition: 0.7s cubic-bezier(0.2, 1, 0.3, 1.3);
+.visible {
+    opacity: 1 !important;
+    transform: none !important;
 }
 
-.run-up.visible {
-    opacity: 1;
-    transform: translateY(0);
+/* Impact rebond */
+.impact {
+    animation: impact 0.3s ease-out forwards;
 }
 
+@keyframes impact {
+    0% { transform: scale(1); }
+    30% { transform: scale(1.04); }
+    60% { transform: scale(0.97); }
+    100% { transform: scale(1); }
+}
+
+/* ===== CONTACT ===== */
 #contact a {
-    color: #ff5722;
+    color: #FF5722;
     font-weight: bold;
     text-decoration: none;
 }
 
 #contact a:hover {
     text-decoration: underline;
+}
+
+/* ===== FOOTER ===== */
+.footer {
+    text-align: center;
+    padding: 30px;
+    margin-top: 60px;
+    background: rgba(0,0,0,0.3);
+    backdrop-filter: blur(4px);
+    color: #FFFFFF;
 }
