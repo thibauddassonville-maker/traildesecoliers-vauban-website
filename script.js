@@ -1,15 +1,5 @@
-
-document.addEventListener("scroll", () => {
-    const scrollPos = window.scrollY;
-    
-    // facteur de zoom (à ajuster selon ton goût)
-    const zoomFactor = 1 + scrollPos / 2000;
-
-    document.querySelector(".background").style.transform = `scale(${zoomFactor})`;
-});
-
-// Appliquer les animations sport/vitesse
-const elements = document.querySelectorAll('.card');
+// ===== ANIMATIONS SPORT =====
+const cards = document.querySelectorAll('.card');
 
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -19,8 +9,43 @@ const observer = new IntersectionObserver((entries) => {
     });
 }, { threshold: 0.3 });
 
-// Ajouter classes de base
-elements.forEach(el => {
-    el.classList.add('speed-in', 'run-up', 'speed-lines');
-    observer.observe(el);
+cards.forEach(card => {
+    card.classList.add('speed-in', 'run-up', 'speed-lines');
+    observer.observe(card);
 });
+
+// ===== COMPTEUR D'ÉLÈVES =====
+const counters = document.querySelectorAll('.counter');
+counters.forEach(counter => {
+    const updateCount = () => {
+        const target = +counter.getAttribute('data-target');
+        const count = +counter.innerText;
+        const increment = Math.ceil(target / 100);
+
+        if(count < target) {
+            counter.innerText = count + increment;
+            setTimeout(updateCount, 20);
+        } else {
+            counter.innerText = target;
+        }
+    };
+
+    const counterObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if(entry.isIntersecting) {
+                updateCount();
+                counterObserver.unobserve(counter);
+            }
+        });
+    }, { threshold: 0.5 });
+
+    counterObserver.observe(counter);
+});
+
+// ===== FOND QUI ZOOM AU SCROLL =====
+window.addEventListener('scroll', () => {
+    const scrollTop = window.scrollY;
+    const scale = 1 + scrollTop / 2000; // ajuste la vitesse
+    document.querySelector('.background').style.transform = `scale(${scale})`;
+});
+
