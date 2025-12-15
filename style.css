@@ -51,6 +51,17 @@ body {
     color: #FFC107;
 }
 
+.header-link {
+  color: #FFC107;
+  text-decoration: none;
+  font-weight: normal;
+  margin-bottom: 30px
+}
+
+.header-link:hover {
+  text-decoration: underline;
+}
+
 /* ===== BOUTONS ===== */
 .btn-primary, .btn-secondary {
     display: inline-block;
